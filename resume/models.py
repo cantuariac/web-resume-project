@@ -17,18 +17,19 @@ class Profile(models.Model):
 
     display_name = models.CharField(_("Name"), max_length=100)
     title = models.CharField(_("Title"), max_length=100, blank=True)
-    picture = models.ImageField(_("Profile picture"),
-                                upload_to="images/profiles",
-                                blank=True)
-    birthday = models.DateField(_("Birthday"), blank=True)
-    summary = models.TextField(_("Summary"), blank=True)
-
-    location = models.CharField(_("Location"), max_length=50, blank=True)
     contact_email = models.EmailField(_("Contact email"),
                                       max_length=254,
                                       blank=True)
     contact_phone = PhoneNumberField(blank=True)
+    location = models.CharField(_("Location"), max_length=50, blank=True)
     website = models.URLField(_("Website"), max_length=256, blank=True)
+    birthday = models.DateField(_("Birthday"), blank=True)
+
+    picture = models.ImageField(_("Profile picture"),
+                                upload_to="profile_pictures/",
+                                blank=True)
+
+    summary = models.TextField(_("Summary"), blank=True)
 
     skill_set = models.ManyToManyField("resume.Skill",
                                        verbose_name=_("skills"),
@@ -89,6 +90,9 @@ class TimelineEvent(models.Model):
     class Meta:
         ordering = ["start_date", "end_date"]
         abstract = True
+
+    def period(self):
+        return f'from {self.start_date.strftime(date_format)} {f"to {self.end_date.strftime(date_format)}" if self.end_date else "until now"}'
 
 
 class JobExperience(TimelineEvent):
