@@ -16,7 +16,8 @@ class ResumeView(TemplateView):
         if (username):
             user = User.objects.get(username=username)
             profile = Profile.objects.get(user=user)
-            print(profile)
+            # print(profile)
             context['profile'] = profile
-
+        print("ResumeView:", self.request.GET)
+        context['nopic'] = 'nopic' in self.request.GET
         return context

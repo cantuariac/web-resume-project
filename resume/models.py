@@ -35,6 +35,11 @@ class Profile(models.Model):
                                        verbose_name=_("skills"),
                                        through="resume.UserSkill",
                                        blank=True)
+    socialmedia_set = models.ManyToManyField(
+        "resume.SocialMedia",
+        through="resume.UserSocialLink",
+        verbose_name=_("Social media link"),
+        blank=True)
 
     class Meta:
         verbose_name = _("profile")
@@ -47,8 +52,23 @@ class Profile(models.Model):
         return reverse("profiles", kwargs={"pk": self.pk})
 
 
-class SocialLink(models.Model):
-    """Model definition for SocialLink."""
+class SocialMedia(models.Model):
+
+    name = models.CharField(_("Name"), max_length=50)
+    base_url = models.URLField(_("Base URL"), max_length=200)
+    icon_color = models.CharField(_("Color"), max_length=6)
+    bi_icon = models.CharField(_("Icon"), max_length=50)
+
+    class Meta:
+        verbose_name = _("Social media")
+        verbose_name_plural = _("Social medias")
+
+    def __str__(self):
+        return self.name
+
+
+class UserSocialLink(models.Model):
+    """Model definition for UserSocialLink."""
 
     # class SocialNetworks(models.IntegerChoices):
     #     choices = list(enumerate(['GitHub', 'LinkedIn']))
@@ -56,20 +76,20 @@ class SocialLink(models.Model):
     profile = models.ForeignKey(Profile,
                                 verbose_name=_("User profile"),
                                 on_delete=models.CASCADE)
-    social_network = models.IntegerField(_("Social Network"),
-                                         choices=enumerate(
-                                             ["GitHub", "LinkedIn"]))
+    socialmedia = models.ForeignKey(SocialMedia,
+                                    verbose_name=_("Social media"),
+                                    on_delete=models.CASCADE)
     link = models.URLField(_("Link"), max_length=200)
 
     class Meta:
         """Meta definition for SocialLink."""
 
-        verbose_name = _("Social")
-        verbose_name_plural = _("Socials")
+        verbose_name = _("User's social media link")
+        verbose_name_plural = _("User's social media links")
 
     def __str__(self):
         """Unicode representation of SocialLink."""
-        return f"{self.profile.display_name}'s {self.get_social_network_display()}"
+        return str(self.link)
 
 
 date_format = "%b %Y"
@@ -109,7 +129,7 @@ class JobExperience(TimelineEvent):
 
     def __str__(self):
         """Unicode representation of JobExperience."""
-        return f'{self.role} at {self.company} from {self.start_date.strftime(date_format)} {f"to {self.end_date.strftime(date_format)}" if self.end_date else "until now"}'
+        return f'{self.role} at {self.company} ' + self.period()
 
 
 class AcademicExperience(TimelineEvent):
@@ -126,8 +146,9 @@ class AcademicExperience(TimelineEvent):
 
     def __str__(self):
         """Unicode representation of Education."""
-        return f'{self.course} at {self.school} from {self.start_date.strftime(date_format)} {f"to {self.end_date.strftime(date_format)}" if self.end_date else "until now"}'  # TODO
+        return f'{self.course} at {self.school} ' + self.period()
 
+models.IntegerChoices
 
 class Skill(models.Model):
     SKILL_TYPE = enumerate([
@@ -179,8 +200,8 @@ class UserSkill(models.Model):
     )
 
     class Meta:
-        verbose_name = _("userskill")
-        verbose_name_plural = _("userskills")
+        verbose_name = _("users' skill")
+        verbose_name_plural = _("users' skills")
 
     def __str__(self):
         return str(self.skill)
