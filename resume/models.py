@@ -46,7 +46,7 @@ class Profile(models.Model):
         verbose_name_plural = _("profiles")
 
     def __str__(self):
-        return self.display_name
+        return f'{self.display_name}({self.user})'
 
     def get_absolute_url(self):
         return reverse("profiles", kwargs={"pk": self.pk})
@@ -148,20 +148,24 @@ class AcademicExperience(TimelineEvent):
         """Unicode representation of Education."""
         return f'{self.course} at {self.school} ' + self.period()
 
-models.IntegerChoices
+
+class SkillType(models.IntegerChoices):
+    (SOFTWARE, PROGRAMING_LANGUAGE, PROGRAMING_TOOL, SOFTWARE_FRAMEWORK,
+     ARCHITECTURE_PARADIGM, LANGUAGE, SOFT_SKILL) = enumerate([
+         _("Software"),
+         _("Programing language"),
+         _("Programing tool"),
+         _("Software framework"),
+         _("Architecture / Paradigm"),
+         _("Language"),
+         _("Soft skill"),
+     ])
+
 
 class Skill(models.Model):
-    SKILL_TYPE = enumerate([
-        _("Software tool"),
-        _("Programing Language"),
-        _("Software framework"),
-        _("Architecture / Paradigm"),
-        _("Language"),
-        _("Soft skill"),
-    ])
 
     type = models.IntegerField(_("Skill type"),
-                               choices=SKILL_TYPE,
+                               choices=SkillType.choices,
                                blank=True,
                                null=True)
 
