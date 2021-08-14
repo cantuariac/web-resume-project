@@ -79,7 +79,16 @@ class UserSocialLink(models.Model):
     socialmedia = models.ForeignKey(SocialMedia,
                                     verbose_name=_("Social media"),
                                     on_delete=models.CASCADE)
-    link = models.URLField(_("Link"), max_length=200)
+    username = models.CharField(_("Username or link"), max_length=50)
+    link = models.URLField(_("Link"), max_length=200, blank=True)
+
+    def get_link(self):
+        if self.username in self.link and self.socialmedia.base_url in self.link:
+            return self.link
+        else:
+            self.link = self.socialmedia.base_url + self.username
+            self.save()
+            return self.link
 
     class Meta:
         """Meta definition for SocialLink."""
@@ -89,7 +98,8 @@ class UserSocialLink(models.Model):
 
     def __str__(self):
         """Unicode representation of SocialLink."""
-        return str(self.link)
+        return f'{self.username}@{self.socialmedia}'
+
 
 
 date_format = "%b %Y"
@@ -120,6 +130,9 @@ class JobExperience(TimelineEvent):
 
     company = models.CharField(_("Company"), max_length=50)
     role = models.CharField(_("Role"), max_length=50)
+    skills_applied = models.ManyToManyField("resume.Skill",
+                                            verbose_name=_("Skills applied"),
+                                            blank=True)
 
     class Meta:
         """Meta definition for JobExperience."""
@@ -172,8 +185,8 @@ class Skill(models.Model):
     name = models.CharField(_("Name"), max_length=50)
 
     class Meta:
-        verbose_name = _("skill")
-        verbose_name_plural = _("skills")
+        verbose_name = _("Skill")
+        verbose_name_plural = _("Skills")
         ordering = ["type", "name"]
 
     def __str__(self):

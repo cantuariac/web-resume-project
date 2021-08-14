@@ -12,7 +12,7 @@ User.objects.create_user("admin",
                          is_staff=True).save()
 
 SocialMedia(name='LinkedIn',
-            base_url='https://www.linkedin.com/in',
+            base_url='https://www.linkedin.com/in/',
             icon_color='0e76a8',
             bi_icon='bi-linkedin').save()
 
@@ -32,7 +32,7 @@ SocialMedia(name='Facebook',
             bi_icon='bi-facebook').save()
 
 SocialMedia(name='Instagram',
-            base_url='https://instagram.com//',
+            base_url='https://instagram.com/',
             icon_color='3f729b',
             bi_icon='bi-instagram').save()
 
