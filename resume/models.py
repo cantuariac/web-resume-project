@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.enums import Choices
 from django.db.models.fields.related import ForeignKey
 from django.utils.translation import ugettext_lazy as _
+from django.utils.text import format_lazy
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
@@ -38,7 +39,7 @@ class Profile(models.Model):
     socialmedia_set = models.ManyToManyField(
         "resume.SocialMedia",
         through="resume.UserSocialLink",
-        verbose_name=_("Social media link"),
+        verbose_name=_("Social media links"),
         blank=True)
 
     class Meta:
@@ -50,6 +51,9 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse("profiles", kwargs={"pk": self.pk})
+    
+    def get_skills(self):
+        return Skill.objects.filter(jobexperience__profile=self).distinct()
 
 
 class SocialMedia(models.Model):
@@ -65,6 +69,9 @@ class SocialMedia(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_color(self):
+        return "#%s" % (self.icon_color)
 
 
 class UserSocialLink(models.Model):
@@ -101,9 +108,10 @@ class UserSocialLink(models.Model):
         return f'{self.username}@{self.socialmedia}'
 
 
+date_format = "b Y"
 
-date_format = "%b %Y"
-
+from django.utils import translation
+from django.template.defaultfilters import date as date_filter
 
 class TimelineEvent(models.Model):
 
@@ -111,8 +119,8 @@ class TimelineEvent(models.Model):
                                 verbose_name=_("User profile"),
                                 on_delete=models.CASCADE)
 
-    description = models.TextField(_("Description"), blank=True)
-    location = models.CharField(_("Location"), max_length=50, blank=True)
+    description = models.TextField(_("Description"))
+    location = models.CharField(_("Location"), max_length=50)
 
     start_date = models.DateField(_("Start date"))
     end_date = models.DateField(_("End date"), blank=True, null=True)
@@ -122,7 +130,15 @@ class TimelineEvent(models.Model):
         abstract = True
 
     def period(self):
-        return f'from {self.start_date.strftime(date_format)} {f"to {self.end_date.strftime(date_format)}" if self.end_date else "until now"}'
+        if self.end_date:
+            return _('from %(start_date)s to %(end_date)s') % {
+                'start_date': date_filter(self.start_date, date_format),
+                'end_date': date_filter(self.end_date, date_format)
+            }
+        else:
+            return _('since %(start_date)s') % {
+                'start_date': date_filter(self.start_date, date_format)
+            }
 
 
 class JobExperience(TimelineEvent):

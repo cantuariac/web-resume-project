@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-12 13:45+0000\n"
+"POT-Creation-Date: 2021-08-22 02:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,256 +18,295 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: resume/models.py:15
+#: resume/models.py:16
 msgid "User"
 msgstr ""
 
-#: resume/models.py:18 resume/models.py:57 resume/models.py:168
-#: resume/models.py:219
+#: resume/models.py:19 resume/models.py:61 resume/models.py:201
+#: resume/models.py:252
 msgid "Name"
 msgstr ""
 
-#: resume/models.py:19 resume/models.py:247
+#: resume/models.py:20 resume/models.py:280
 msgid "Title"
 msgstr ""
 
-#: resume/models.py:20
+#: resume/models.py:21
 msgid "Contact email"
 msgstr ""
 
-#: resume/models.py:24 resume/models.py:105
+#: resume/models.py:25 resume/models.py:123
 msgid "Location"
 msgstr ""
 
-#: resume/models.py:25
+#: resume/models.py:26
 msgid "Website"
 msgstr ""
 
-#: resume/models.py:26
+#: resume/models.py:27
 msgid "Birthday"
 msgstr ""
 
-#: resume/models.py:28
+#: resume/models.py:29
 msgid "Profile picture"
 msgstr ""
 
-#: resume/models.py:32
+#: resume/models.py:33
 msgid "Summary"
 msgstr ""
 
-#: resume/models.py:35 resume/models.py:172
+#: resume/models.py:36
 msgid "skills"
+msgstr "habilidades"
+
+#: resume/models.py:42
+msgid "Social media links"
 msgstr ""
 
-#: resume/models.py:41
-msgid "Social media link"
-msgstr ""
-
-#: resume/models.py:45
+#: resume/models.py:46
 msgid "profile"
 msgstr "perfil"
 
-#: resume/models.py:46
+#: resume/models.py:47
 msgid "profiles"
 msgstr "perfis"
 
-#: resume/models.py:58
+#: resume/models.py:62
 msgid "Base URL"
 msgstr ""
 
-#: resume/models.py:59
+#: resume/models.py:63
 msgid "Color"
 msgstr ""
 
-#: resume/models.py:60
+#: resume/models.py:64
 msgid "Icon"
 msgstr ""
 
-#: resume/models.py:63 resume/models.py:80
+#: resume/models.py:67 resume/models.py:87
 msgid "Social media"
 msgstr ""
 
-#: resume/models.py:64
+#: resume/models.py:68
 msgid "Social medias"
 msgstr ""
 
-#: resume/models.py:77 resume/models.py:101 resume/models.py:185
-#: resume/models.py:216 resume/models.py:244
+#: resume/models.py:84 resume/models.py:119 resume/models.py:218
+#: resume/models.py:249 resume/models.py:277
 msgid "User profile"
 msgstr ""
 
-#: resume/models.py:82 resume/models.py:252
+#: resume/models.py:89
+msgid "Username or link"
+msgstr ""
+
+#: resume/models.py:90 resume/models.py:285
 msgid "Link"
 msgstr ""
 
-#: resume/models.py:87
+#: resume/models.py:103
 msgid "User's social media link"
 msgstr ""
 
-#: resume/models.py:88
+#: resume/models.py:104
 msgid "User's social media links"
 msgstr ""
 
-#: resume/models.py:104 resume/models.py:248
+#: resume/models.py:122 resume/models.py:281
 msgid "Description"
 msgstr ""
 
-#: resume/models.py:107
+#: resume/models.py:125
 msgid "Start date"
 msgstr "Data de inicio"
 
-#: resume/models.py:108
+#: resume/models.py:126
 msgid "End date"
 msgstr "Data fim"
 
-#: resume/models.py:121
+#: resume/models.py:134
+#, python-format
+msgid "from %(start_date)s to %(end_date)s"
+msgstr "de %(start_date)s até %(end_date)s"
+
+#: resume/models.py:139
+#, python-format
+msgid "since %(start_date)s"
+msgstr "desde %(start_date)s"
+
+#: resume/models.py:147
 msgid "Company"
 msgstr ""
 
-#: resume/models.py:122
+#: resume/models.py:148
 msgid "Role"
 msgstr ""
 
-#: resume/models.py:127
-msgid "Job experience"
-msgstr "Experiência profissional"
-
-#: resume/models.py:128
-msgid "Job experiences"
-msgstr "Experiências profissionais"
-
-#: resume/models.py:138
-msgid "School"
-msgstr ""
-
-#: resume/models.py:139
-msgid "Course"
-msgstr ""
-
-#: resume/models.py:144
-msgid "Academic experience"
-msgstr ""
-
-#: resume/models.py:145
-msgid "Academic experiences"
-msgstr ""
-
-#: resume/models.py:155
-msgid "Software tool"
+#: resume/models.py:150
+msgid "Skills applied"
 msgstr ""
 
 #: resume/models.py:156
-msgid "Programing Language"
-msgstr ""
+msgid "Job experience"
+msgstr "Experiência profissional"
 
 #: resume/models.py:157
+msgid "Job experiences"
+msgstr "Experiências profissionais"
+
+#: resume/models.py:167
+msgid "School"
+msgstr ""
+
+#: resume/models.py:168
+msgid "Course"
+msgstr ""
+
+#: resume/models.py:173
+msgid "Academic experience"
+msgstr "Experiência acadêmica"
+
+#: resume/models.py:174
+msgid "Academic experiences"
+msgstr "Experiências acadêmicas"
+
+#: resume/models.py:184
+msgid "Software"
+msgstr ""
+
+#: resume/models.py:185
+msgid "Programing language"
+msgstr ""
+
+#: resume/models.py:186
+msgid "Programing tool"
+msgstr ""
+
+#: resume/models.py:187
 msgid "Software framework"
 msgstr ""
 
-#: resume/models.py:158
+#: resume/models.py:188
 msgid "Architecture / Paradigm"
 msgstr ""
 
-#: resume/models.py:159
+#: resume/models.py:189
 msgid "Language"
 msgstr ""
 
-#: resume/models.py:160
+#: resume/models.py:190
 msgid "Soft skill"
 msgstr ""
 
-#: resume/models.py:163
+#: resume/models.py:196
 msgid "Skill type"
 msgstr ""
 
-#: resume/models.py:171
-msgid "skill"
-msgstr ""
-
-#: resume/models.py:188 resume/models.py:221
+#: resume/models.py:204 resume/models.py:221 resume/models.py:254
 msgid "Skill"
-msgstr ""
+msgstr "Habilidade"
 
-#: resume/models.py:191
+#: resume/models.py:205
+msgid "Skills"
+msgstr "Habilidades"
+
+#: resume/models.py:224
 msgid "Proficiency level"
 msgstr ""
 
-#: resume/models.py:193
+#: resume/models.py:226
 msgid "Novice"
 msgstr ""
 
-#: resume/models.py:194
+#: resume/models.py:227
 msgid "Beginner"
 msgstr ""
 
-#: resume/models.py:195
+#: resume/models.py:228
 msgid "Competent"
 msgstr ""
 
-#: resume/models.py:196
+#: resume/models.py:229
 msgid "Proficient"
 msgstr ""
 
-#: resume/models.py:197
+#: resume/models.py:230
 msgid "Expert"
 msgstr ""
 
-#: resume/models.py:203
+#: resume/models.py:236
 msgid "users' skill"
 msgstr ""
 
-#: resume/models.py:204
+#: resume/models.py:237
 msgid "users' skills"
 msgstr ""
 
-#: resume/models.py:225
+#: resume/models.py:258
 msgid "Certificate link"
 msgstr ""
 
-#: resume/models.py:226
+#: resume/models.py:259
 msgid "Certificate file"
 msgstr ""
 
-#: resume/models.py:231
+#: resume/models.py:264
 msgid "certificate"
 msgstr ""
 
-#: resume/models.py:232
+#: resume/models.py:265
 msgid "certificates"
 msgstr ""
 
-#: resume/models.py:249
+#: resume/models.py:282
 msgid "Cover image"
 msgstr ""
 
-#: resume/models.py:253
+#: resume/models.py:286
 msgid "Date"
 msgstr ""
 
-#: resume/models.py:256
+#: resume/models.py:289
 msgid "Entry type"
 msgstr ""
 
-#: resume/models.py:258
+#: resume/models.py:291
 msgid "Side project"
 msgstr ""
 
-#: resume/models.py:259
+#: resume/models.py:292
 msgid "Client project"
 msgstr ""
 
-#: resume/models.py:260
+#: resume/models.py:293
 msgid "Product"
 msgstr ""
 
-#: resume/models.py:261
+#: resume/models.py:294
 msgid "Publication"
 msgstr ""
 
-#: resume/models.py:268
+#: resume/models.py:301
 msgid "portfolio entry"
 msgstr ""
 
-#: resume/models.py:269
+#: resume/models.py:302
 msgid "portfolio entries"
+msgstr ""
+
+#: resume/views.py:35
+#, python-brace-format
+msgid "\"{language}\" is not a valid language code"
+msgstr ""
+
+#: templates/resume.html:59
+msgid "Contact information"
+msgstr "Informações de contato"
+
+#: web_resume/settings.py:140
+msgid "English"
+msgstr ""
+
+#: web_resume/settings.py:141
+msgid "Portuguese"
 msgstr ""
