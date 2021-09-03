@@ -22,7 +22,7 @@ class Profile(models.Model):
                                       max_length=254,
                                       blank=True)
     contact_phone = PhoneNumberField(blank=True)
-    location = models.CharField(_("Location"), max_length=50, blank=True)
+    location = models.CharField(_("Location"), max_length=100, blank=True)
     website = models.URLField(_("Website"), max_length=256, blank=True)
     birthday = models.DateField(_("Birthday"), blank=True)
 
@@ -47,7 +47,7 @@ class Profile(models.Model):
         verbose_name_plural = _("profiles")
 
     def __str__(self):
-        return f'{self.display_name}({self.user})'
+        return f'{self.display_name}'
 
     def get_absolute_url(self):
         return reverse("profiles", kwargs={"pk": self.pk})
@@ -58,10 +58,10 @@ class Profile(models.Model):
 
 class SocialMedia(models.Model):
 
-    name = models.CharField(_("Name"), max_length=50)
-    base_url = models.URLField(_("Base URL"), max_length=200)
+    name = models.CharField(_("Name"), max_length=100)
+    base_url = models.URLField(_("Base URL"))
     icon_color = models.CharField(_("Color"), max_length=6)
-    bi_icon = models.CharField(_("Icon"), max_length=50)
+    bi_icon = models.CharField(_("Icon"), max_length=100)
 
     class Meta:
         verbose_name = _("Social media")
@@ -86,7 +86,7 @@ class UserSocialLink(models.Model):
     socialmedia = models.ForeignKey(SocialMedia,
                                     verbose_name=_("Social media"),
                                     on_delete=models.CASCADE)
-    username = models.CharField(_("Username or link"), max_length=50)
+    username = models.CharField(_("Username or link"), max_length=100)
     link = models.URLField(_("Link"), max_length=200, blank=True)
 
     def get_link(self):
@@ -120,7 +120,7 @@ class TimelineEvent(models.Model):
                                 on_delete=models.CASCADE)
 
     description = models.TextField(_("Description"))
-    location = models.CharField(_("Location"), max_length=50)
+    location = models.CharField(_("Location"), max_length=100)
 
     start_date = models.DateField(_("Start date"))
     end_date = models.DateField(_("End date"), blank=True, null=True)
@@ -144,8 +144,8 @@ class TimelineEvent(models.Model):
 class JobExperience(TimelineEvent):
     """Model definition for JobExperience."""
 
-    company = models.CharField(_("Company"), max_length=50)
-    role = models.CharField(_("Role"), max_length=50)
+    company = models.CharField(_("Company"), max_length=100)
+    role = models.CharField(_("Role"), max_length=100)
     skills_applied = models.ManyToManyField("resume.Skill",
                                             verbose_name=_("Skills applied"),
                                             blank=True)
@@ -164,8 +164,8 @@ class JobExperience(TimelineEvent):
 class AcademicExperience(TimelineEvent):
     """Model definition for Academic experience."""
 
-    school = models.CharField(_("School"), max_length=50)
-    course = models.CharField(_("Course"), max_length=50)
+    school = models.CharField(_("School"), max_length=100)
+    course = models.CharField(_("Course"), max_length=100)
 
     class Meta:
         """Meta definition for Education."""
@@ -198,7 +198,7 @@ class Skill(models.Model):
                                blank=True,
                                null=True)
 
-    name = models.CharField(_("Name"), max_length=50)
+    name = models.CharField(_("Name"), max_length=100)
 
     class Meta:
         verbose_name = _("Skill")
@@ -249,7 +249,7 @@ class Certificate(models.Model):
                                 verbose_name=_("User profile"),
                                 on_delete=models.CASCADE)
 
-    name = models.CharField(_("Name"), max_length=50)
+    name = models.CharField(_("Name"), max_length=100)
     skill = models.ForeignKey(Skill,
                               verbose_name=_("Skill"),
                               on_delete=models.SET_NULL,
@@ -277,13 +277,13 @@ class PortfolioEntry(models.Model):
                                 verbose_name=_("User profile"),
                                 on_delete=models.CASCADE)
 
-    title = models.CharField(_("Title"), max_length=50)
+    title = models.CharField(_("Title"), max_length=100)
     description = models.TextField(_("Description"), blank=True)
     cover = models.ImageField(_("Cover image"),
-                              upload_to="images/portfolio",
+                              upload_to="portfolioentries",
                               blank=True)
     link = models.URLField(_("Link"), max_length=200, blank=True)
-    date = models.DateField(_("Date"), blank=True)
+    date = models.DateField(_("Date"), blank=True, null=True)
 
     type = models.IntegerField(
         _("Entry type"),
@@ -298,7 +298,7 @@ class PortfolioEntry(models.Model):
     )
 
     class Meta:
-        verbose_name = _("portfolio entry")
+        verbose_name = _("Portfolio")
         verbose_name_plural = _("portfolio entries")
 
     def __str__(self):
