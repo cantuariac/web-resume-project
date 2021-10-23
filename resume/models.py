@@ -5,10 +5,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.text import format_lazy
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import RegexValidator
 
 User = get_user_model()
 
+phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
 
 class Profile(models.Model):
 
@@ -21,7 +22,7 @@ class Profile(models.Model):
     contact_email = models.EmailField(_("Contact email"),
                                       max_length=254,
                                       blank=True)
-    contact_phone = PhoneNumberField(blank=True)
+    contact_phone = models.CharField(validators=[phone_regex], max_length=17, blank=True)
     location = models.CharField(_("Location"), max_length=100, blank=True)
     website = models.URLField(_("Website"), max_length=256, blank=True)
     birthday = models.DateField(_("Birthday"), blank=True)
