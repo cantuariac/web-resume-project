@@ -127,7 +127,6 @@ class TimelineEvent(models.Model):
     end_date = models.DateField(_("End date"), blank=True, null=True)
 
     class Meta:
-        ordering = ["start_date", "end_date"]
         abstract = True
 
     def period(self):
@@ -156,6 +155,7 @@ class JobExperience(TimelineEvent):
 
         verbose_name = _("Job experience")
         verbose_name_plural = _("Job experiences")
+        ordering = ["-start_date"]
 
     def __str__(self):
         """Unicode representation of JobExperience."""
@@ -173,6 +173,7 @@ class AcademicExperience(TimelineEvent):
 
         verbose_name = _("Academic experience")
         verbose_name_plural = _("Academic experiences")
+        ordering = ["-start_date"]
 
     def __str__(self):
         """Unicode representation of Education."""
