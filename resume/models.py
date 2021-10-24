@@ -25,7 +25,7 @@ class Profile(models.Model):
     contact_phone = models.CharField(validators=[phone_regex], max_length=17, blank=True)
     location = models.CharField(_("Location"), max_length=100, blank=True)
     website = models.URLField(_("Website"), max_length=256, blank=True)
-    birthday = models.DateField(_("Birthday"), blank=True)
+    birthday = models.DateField(_("Birthday"), blank=True, null=True)
 
     picture = models.ImageField(_("Profile picture"),
                                 upload_to="profile_pictures/",

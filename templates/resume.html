@@ -89,18 +89,21 @@
                 </div>
                 {% endif %}
                 <!-- Skills-->
-                <div class="card mb-4">
-                    <div class="card-header">{% get_verbose_name_plural profile.skill_set.first %}</div>
-                    <div class="card-body">
-                        <div>
-                            {% for skill in profile.get_skills %}
+                {% if profile.skill_set.any %}
+                    <div class="card mb-4">
+                        <div class="card-header">{% get_verbose_name_plural profile.skill_set.first %}</div>
+                        <div class="card-body">
+                            <div>
+                                {% for skill in profile.get_skills %}
 
-                            <div class="badge rounded-pill bg-primary">{{skill}}</div>
+                                <div class="badge rounded-pill bg-primary">{{skill}}</div>
 
-                            {% endfor %}
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
+               
             </div>
 
             <div class="col-lg-8">
