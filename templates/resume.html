@@ -111,7 +111,8 @@
                 <!-- Job experience -->
                 {% if profile.jobexperience_set.all %}
                 <section class="m-2 mb-4">
-                    <h2 class="fw-bolder">{% get_verbose_name profile.jobexperience_set.first %}</h2>
+                    <h2 class="fw-bolder">{% translate "Job experiences" %}</h2>
+                    <!-- <h2 class="fw-bolder">{% get_verbose_name profile.jobexperience_set.first %}</h2> -->
 
                     {% for job in profile.jobexperience_set.all %}
                     <div class="card mb-2 bt-2">
@@ -147,7 +148,7 @@
                 {% if profile.academicexperience_set.all %}
                 <section class="m-2 mb-4 ">
                     <h2 class="fw-bolder mb-2 ">
-                        {% get_verbose_name profile.academicexperience_set.first %}
+                        {% translate "Academic experiences" %}
                     </h2>
 
                     {% for education in profile.academicexperience_set.all %}

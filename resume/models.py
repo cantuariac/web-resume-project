@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.enums import Choices
 from django.db.models.fields.related import ForeignKey
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 from django.utils.text import format_lazy
 from django.urls import reverse
 from django.contrib.auth import get_user_model
@@ -146,7 +146,7 @@ class JobExperience(TimelineEvent):
 
     company = models.CharField(_("Company"), max_length=100)
     role = models.CharField(_("Role"), max_length=100)
-    skills_applied = models.ManyToManyField("resume.Skill",
+    skills_applied = models.ManyToManyField("resume.UserSkill",
                                             verbose_name=_("Skills applied"),
                                             blank=True)
 
@@ -237,9 +237,12 @@ class UserSkill(models.Model):
     class Meta:
         verbose_name = _("users' skill")
         verbose_name_plural = _("users' skills")
-
+    
     def __str__(self):
-        return str(self.skill)
+        return self.skill.name
+    
+    def label(self):
+        return _("%(p)s is %(l)s in %(s)s"%{'p':self.profile, 'l': self.get_level_display(), 's': self.skill})
 
     def get_absolute_url(self):
         return reverse("userskills", kwargs={"pk": self.pk})
