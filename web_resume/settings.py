@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'web_resume_db',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '192.168.1.104',
+        'HOST': '192.168.1.7',
         'PORT': '5432',
     },
     'sqlite': {
