@@ -15,7 +15,7 @@ class ResumeView(TemplateView):
                          **kwargs) -> HttpResponse:
         context = super().get_context_data(**kwargs)
 
-        # print("ResumeView:", self.request.GET)
+       # print("ResumeView:", self.request.GET)
 
         if (username):
             user = User.objects.get(username=username)
@@ -28,8 +28,6 @@ class ResumeView(TemplateView):
         if 'language' in self.request.GET:
             language = self.request.GET['language']
             if translation.check_for_language(language):
-                print("ResumeView:",
-                      "language=" + language)
                 translation.activate(language)
             else:
                 context['error'] = _(f'"{language}" is not a valid language code')
