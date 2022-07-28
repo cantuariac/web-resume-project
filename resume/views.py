@@ -5,7 +5,10 @@ from django.utils import translation
 from django.views.generic import TemplateView
 from .models import *
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.utils.decorators import method_decorator
 
+@method_decorator(xframe_options_exempt, name='dispatch')
 class ResumeView(TemplateView):
     template_name = "resume.html"
 

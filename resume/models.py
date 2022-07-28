@@ -296,7 +296,8 @@ class PortfolioEntry(models.Model):
             _("Side project"),
             _("Client project"),
             _("Product"),
-            _("Publication")
+            _("Publication"),
+            _("POC")
         ]),
         blank=True,
         null=True,
