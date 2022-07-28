@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         username = options['username']
-        profile = Profile.objects.filter(user__username=username).first()
+        profile = UserProfile.objects.filter(user__username=username).first()
         if not profile:
             raise CommandError(f'User {username} does not exists')
         print(f'Generating html resume for {profile}\'s profile')

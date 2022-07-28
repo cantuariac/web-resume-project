@@ -1,15 +1,4 @@
 from resume.models import *
-from faker import Faker
-from django.contrib.auth.models import User
-import random
-from datetime import date
-
-faker: Faker = Faker(locale="pt-br")
-
-User.objects.create_user("admin",
-                         password="1q2w",
-                         is_superuser=True,
-                         is_staff=True).save()
 
 SocialMedia(name='LinkedIn',
             base_url='https://www.linkedin.com/in/',

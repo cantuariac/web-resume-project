@@ -22,7 +22,7 @@ class ResumeView(TemplateView):
 
         if (username):
             user = User.objects.get(username=username)
-            profile = Profile.objects.get(user=user)
+            profile = UserProfile.objects.get(user=user)
             # print(profile)
             context['profile'] = profile
 
