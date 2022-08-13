@@ -13,7 +13,7 @@ phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
 
 
 class UserProfile(AbstractUser):
-    display_name = models.CharField(_("Name"), max_length=100)
+    display_name = models.CharField(_("Display name"), max_length=100)
     title = models.CharField(_("Title"), max_length=100, blank=True)
     contact_email = models.EmailField(_("Contact email"),
                                       max_length=254,
@@ -44,7 +44,7 @@ class UserProfile(AbstractUser):
         verbose_name_plural = _("user profiles")
 
     def __str__(self):
-        return f'{self.display_name}'
+        return f'{self.username}'
 
     def get_absolute_url(self):
         return reverse("profiles", kwargs={"pk": self.pk})
