@@ -50,7 +50,7 @@ class UserProfile(AbstractUser):
         return reverse("profiles", kwargs={"pk": self.pk})
 
     def get_skills(self):
-        return Skill.objects.filter(jobexperience__profile=self).distinct()
+        return UserSkill.objects.filter(user=self).distinct()
 
 
 class UserSocialLink(models.Model):

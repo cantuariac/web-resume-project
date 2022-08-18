@@ -4,6 +4,9 @@ from django.utils import translation
 from django.core.management.base import BaseCommand, CommandError
 import argparse
 
+from user_profile.models import UserProfile
+
+
 class Command(BaseCommand):
     help = 'Generates a html file of a given user\'s resume'
 
@@ -13,7 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         username = options['username']
-        profile = UserProfile.objects.filter(user__username=username).first()
+        profile = UserProfile.objects.filter(username=username).first()
         if not profile:
             raise CommandError(f'User {username} does not exists')
         print(f'Generating html resume for {profile}\'s profile')
