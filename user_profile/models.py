@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.urls import reverse
@@ -12,6 +14,11 @@ phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                              message="Phone number must be entered in the format: '+999999999'.")
 
 
+def profile_picture_file_path(user, filename: str):
+    ext = filename.split('.')[-1]
+    return f'profile_pictures/{uuid4()}.{ext}'
+
+
 class UserProfile(AbstractUser):
     display_name = models.CharField(_("Display name"), max_length=100)
     title = models.CharField(_("Title"), max_length=100, blank=True)
@@ -24,7 +31,7 @@ class UserProfile(AbstractUser):
     birthday = models.DateField(_("Birthday"), blank=True, null=True)
 
     picture = models.ImageField(_("Profile picture"),
-                                upload_to="profile_pictures/",
+                                upload_to=profile_picture_file_path,
                                 blank=True)
 
     summary = models.TextField(_("Summary"), blank=True)
@@ -182,6 +189,11 @@ class UserSkill(models.Model):
         return reverse("userskills", kwargs={"pk": self.pk})
 
 
+def certificate_file_path(certificate, filename: str):
+    ext = filename.split('.')[-1]
+    return f'certificates/{certificate.user.username}/{uuid4()}.{ext}'
+
+
 class Certificate(models.Model):
     user = models.ForeignKey(UserProfile,
                              verbose_name=_("User profile"),
@@ -195,12 +207,12 @@ class Certificate(models.Model):
                               null=True)
     link = models.URLField(_("Certificate link"), max_length=200, blank=True)
     file = models.FileField(_("Certificate file"),
-                            upload_to="storage/portfolio",
+                            upload_to=certificate_file_path,
                             blank=True)
 
     class Meta:
-        verbose_name = _("certificate")
-        verbose_name_plural = _("certificates")
+        verbose_name = _("Certificate")
+        verbose_name_plural = _("Certificates")
 
     def __str__(self):
         return self.name

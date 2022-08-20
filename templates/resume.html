@@ -17,23 +17,29 @@
         }
 
 
+
+
+
+
+
+
     </style>
 
     <title>{{ profile.display_name }}'s web resume</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" class="bg-primary bg-opacity-50">
 <!-- Page content-->
 <div class="jumbotron m-5 mb-0">
     <!-- Post header-->
-    <header class="d-flex justify-content-between">
+    <header class="d-flex justify-content-between mb-5">
         <!-- Post title-->
         <div>
             <h1 class="fw-bolder mb-1">{{ profile.display_name }}</h1>
             {% if profile.title %}
             <h3 class="mb-1">{{ profile.title }}</h3>
             {% endif %}
-            <div class="card-subtitle text-muted">
+            <div class="card-subtitle">
                 <!-- -->
                 {% if profile.location %}
                 <h5>
@@ -48,13 +54,13 @@
 
         <!-- Profile picture -->
         {% if profile.picture and not nopic%}
-        <figure class="mb-0">
+        <figure class="ms-5">
             <img class="rounded" style="width: 150px" src="{{profile.picture.url}}"/>
         </figure>
         {% endif %}
     </header>
 </div>
-<div class="container-fluid">
+<div class="container-fluid bg-white">
     <div class="row flex-wrap-reverse">
         <!-- Side widgets-->
         <div class="col-lg-3 mt-2">
@@ -95,40 +101,43 @@
             </div>
 
             <!-- Skills-->
-            <!--
-            {% if profile.get_skills.any %}
-                    <div class="card mb-4">
-                        <div class="card-header">{% get_verbose_name_plural profile.skill_set.first %}</div>
-                        <div class="card-body">
-                            <div>
-                                {% for skill in profile.get_skills %}
+            {% comment %}
+            {% if profile.get_skills.all %}
+            <div class="card mb-4">
+                <div class="card-header">{% get_verbose_name_plural profile.skill_set.first %}</div>
+                <div class="card-body">
+                    <div>
+                        {% for skill in profile.get_skills %}
 
-                                <div class="badge rounded-pill bg-primary">{{skill}}</div>
+                        <div class="badge rounded-pill bg-primary">{{skill}}</div>
 
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-                -->
-
-            <!-- Certificates-->
-            <!--
-            {% if profile.certificate_set.any %}
-                <div class="card mb-4">
-                    <div class="card-header">{% get_verbose_name_plural profile.certificate_set.first %}</div>
-                    <div class="card-body">
-                        <div>
-                            {% for certificate in profile.certificate_set %}
-
-                            <div class="badge rounded-pill bg-primary">{{certificate}}</div>
-
-                            {% endfor %}
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
+            </div>
+            {% endif %]
+            {% endcomment %}
+
+            <!-- Certificates-->
+            {% if profile.certificate_set.all %}
+            <div class="card mb-4">
+                <div class="card-header">{% get_verbose_name_plural profile.certificate_set.first %}</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for certificate in profile.certificate_set.all %}
+
+                        <a href="{% if certificate.link %}{{ certificate.link }}
+                                 {% elif certificate.file %}{{certificate.file.url}}
+                                 {% endif %}"
+                           target="_blank"
+                           class="list-group-item list-group-item-action">{{certificate}}</a>
+
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
             {% endif %}
-            -->
 
         </div>
 

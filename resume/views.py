@@ -21,7 +21,7 @@ class ResumeView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         if username:
-            profile = UserProfile.objects.get(username=username)
+            profile: UserProfile = UserProfile.objects.get(username=username)
             # print(profile)
             context['profile'] = profile
 
