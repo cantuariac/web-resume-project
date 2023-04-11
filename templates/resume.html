@@ -121,7 +121,8 @@
             <!-- Certificates-->
             {% if profile.certificate_set.all %}
             <div class="card mb-4">
-                <div class="card-header">{% get_verbose_name_plural profile.certificate_set.first %}</div>
+                <!-- <div class="card-header">{% get_verbose_name_plural profile.certificate_set.first %}</div> -->
+                <div class="card-header">{% translate "Certificates" %}</div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         {% for certificate in profile.certificate_set.all %}
