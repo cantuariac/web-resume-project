@@ -1,5 +1,7 @@
 
 /*.html
+/*.json
+caio_populate.py
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/django,python
