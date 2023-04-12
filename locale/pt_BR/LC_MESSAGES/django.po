@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 10:59-0300\n"
+"POT-Creation-Date: 2023-04-12 10:07-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1214,7 +1214,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: .\resume\models.py:13 .\resume\models.py:52 .\user_profile\models.py:202
+#: .\resume\models.py:13 .\resume\models.py:52 .\user_profile\models.py:203
 msgid "Name"
 msgstr "Nome"
 
@@ -1230,7 +1230,7 @@ msgstr "Cor"
 msgid "Icon"
 msgstr "Ícone"
 
-#: .\resume\models.py:19 .\user_profile\models.py:70
+#: .\resume\models.py:19 .\user_profile\models.py:71
 msgid "Social media"
 msgstr "Mídia social"
 
@@ -1270,8 +1270,8 @@ msgstr ""
 msgid "Skill type"
 msgstr "Tipo de habiladade"
 
-#: .\resume\models.py:55 .\user_profile\models.py:164
-#: .\user_profile\models.py:204
+#: .\resume\models.py:55 .\user_profile\models.py:165
+#: .\user_profile\models.py:205
 msgid "Skill"
 msgstr "Habilidade"
 
@@ -1279,7 +1279,7 @@ msgstr "Habilidade"
 msgid "Skills"
 msgstr "Habilidades"
 
-#: .\resume\views.py:41
+#: .\resume\views.py:40
 #, python-brace-format
 msgid "\"{language}\" is not a valid language code"
 msgstr ""
@@ -1288,17 +1288,17 @@ msgstr ""
 msgid "Contact information"
 msgstr "Informações de contato"
 
-#: .\templates\resume.html:126 .\user_profile\models.py:215
+#: .\templates\resume.html:126 .\user_profile\models.py:219
 #, fuzzy
 #| msgid "certificates"
 msgid "Certificates"
 msgstr "Certificados"
 
-#: .\templates\resume.html:151 .\user_profile\models.py:133
+#: .\templates\resume.html:151 .\user_profile\models.py:134
 msgid "Job experiences"
 msgstr "Experiências profissionais"
 
-#: .\templates\resume.html:188 .\user_profile\models.py:151
+#: .\templates\resume.html:188 .\user_profile\models.py:152
 msgid "Academic experiences"
 msgstr "Experiências acadêmicas"
 
@@ -1306,7 +1306,7 @@ msgstr "Experiências acadêmicas"
 msgid "Display name"
 msgstr ""
 
-#: .\user_profile\models.py:24 .\user_profile\models.py:229
+#: .\user_profile\models.py:24 .\user_profile\models.py:233
 msgid "Title"
 msgstr "Título"
 
@@ -1314,206 +1314,215 @@ msgstr "Título"
 msgid "Contact email"
 msgstr "Email de contato"
 
-#: .\user_profile\models.py:29 .\user_profile\models.py:100
+#: .\user_profile\models.py:30 .\user_profile\models.py:101
 msgid "Location"
 msgstr "Localização"
 
-#: .\user_profile\models.py:30
+#: .\user_profile\models.py:31
 msgid "Website"
 msgstr ""
 
-#: .\user_profile\models.py:31
+#: .\user_profile\models.py:32
 msgid "Birthday"
 msgstr "Aniversário"
 
-#: .\user_profile\models.py:33
+#: .\user_profile\models.py:34
 msgid "Profile picture"
 msgstr "Foto de perfil"
 
-#: .\user_profile\models.py:37
+#: .\user_profile\models.py:38
 msgid "Summary"
 msgstr "Resumo"
 
-#: .\user_profile\models.py:40
+#: .\user_profile\models.py:41
 msgid "skills"
 msgstr "habilidades"
 
-#: .\user_profile\models.py:46
+#: .\user_profile\models.py:47
 msgid "Social media links"
 msgstr ""
 
-#: .\user_profile\models.py:50
+#: .\user_profile\models.py:51
 #, fuzzy
 #| msgid "User profile"
 msgid "user profile"
 msgstr "Perfil de usuário"
 
-#: .\user_profile\models.py:51
+#: .\user_profile\models.py:52
 #, fuzzy
 #| msgid "User profile"
 msgid "user profiles"
 msgstr "Perfil de usuário"
 
-#: .\user_profile\models.py:67 .\user_profile\models.py:96
-#: .\user_profile\models.py:161 .\user_profile\models.py:199
-#: .\user_profile\models.py:226
+#: .\user_profile\models.py:68 .\user_profile\models.py:97
+#: .\user_profile\models.py:162 .\user_profile\models.py:200
+#: .\user_profile\models.py:230
 msgid "User profile"
 msgstr "Perfil de usuário"
 
-#: .\user_profile\models.py:72
+#: .\user_profile\models.py:73
 msgid "Username or link"
 msgstr "Username ou link"
 
-#: .\user_profile\models.py:73 .\user_profile\models.py:234
+#: .\user_profile\models.py:74 .\user_profile\models.py:238
 msgid "Link"
 msgstr ""
 
-#: .\user_profile\models.py:86
+#: .\user_profile\models.py:87
 msgid "User's social media link"
 msgstr ""
 
-#: .\user_profile\models.py:87
+#: .\user_profile\models.py:88
 msgid "User's social media links"
 msgstr ""
 
-#: .\user_profile\models.py:99 .\user_profile\models.py:230
+#: .\user_profile\models.py:100 .\user_profile\models.py:234
 msgid "Description"
 msgstr "Descrição"
 
-#: .\user_profile\models.py:102
+#: .\user_profile\models.py:103
 msgid "Start date"
 msgstr "Data de inicio"
 
-#: .\user_profile\models.py:103
+#: .\user_profile\models.py:104
 msgid "End date"
 msgstr "Data fim"
 
-#: .\user_profile\models.py:110
+#: .\user_profile\models.py:111
 #, python-format
 msgid "from %(start_date)s to %(end_date)s"
 msgstr "de %(start_date)s até %(end_date)s"
 
-#: .\user_profile\models.py:115
+#: .\user_profile\models.py:116
 #, python-format
 msgid "since %(start_date)s"
 msgstr "desde %(start_date)s"
 
-#: .\user_profile\models.py:123
+#: .\user_profile\models.py:124
 msgid "Company"
 msgstr "Empresa"
 
-#: .\user_profile\models.py:124
+#: .\user_profile\models.py:125
 msgid "Role"
 msgstr "Cargo"
 
-#: .\user_profile\models.py:126
+#: .\user_profile\models.py:127
 msgid "Skills applied"
 msgstr "Habilidades aplicadas"
 
-#: .\user_profile\models.py:132
+#: .\user_profile\models.py:133
 msgid "Job experience"
 msgstr "Experiência profissional"
 
-#: .\user_profile\models.py:144
+#: .\user_profile\models.py:145
 msgid "School"
 msgstr "Escola"
 
-#: .\user_profile\models.py:145
+#: .\user_profile\models.py:146
 msgid "Course"
 msgstr "Curso"
 
-#: .\user_profile\models.py:150
+#: .\user_profile\models.py:151
 msgid "Academic experience"
 msgstr "Experiência acadêmica"
 
-#: .\user_profile\models.py:167
+#: .\user_profile\models.py:168
 msgid "Proficiency level"
 msgstr "Nível de proficiência"
 
-#: .\user_profile\models.py:169
+#: .\user_profile\models.py:170
 msgid "Novice"
 msgstr "Novato"
 
-#: .\user_profile\models.py:170
+#: .\user_profile\models.py:171
 msgid "Beginner"
 msgstr "Iniciante"
 
-#: .\user_profile\models.py:171
+#: .\user_profile\models.py:172
 msgid "Competent"
 msgstr "Competente"
 
-#: .\user_profile\models.py:172
+#: .\user_profile\models.py:173
 msgid "Proficient"
 msgstr "Proficiente"
 
-#: .\user_profile\models.py:173
+#: .\user_profile\models.py:174
 msgid "Expert"
 msgstr ""
 
-#: .\user_profile\models.py:179
+#: .\user_profile\models.py:180
 msgid "users' skill"
 msgstr "Habilidade do usuário"
 
-#: .\user_profile\models.py:180
+#: .\user_profile\models.py:181
 msgid "users' skills"
 msgstr "Habilidades do usuário"
 
-#: .\user_profile\models.py:186
+#: .\user_profile\models.py:187
 #, python-format
 msgid "%(p)s is %(l)s in %(s)s"
 msgstr ""
 
-#: .\user_profile\models.py:208
+#: .\user_profile\models.py:209
 msgid "Certificate link"
 msgstr "Link do certificado"
 
-#: .\user_profile\models.py:209
+#: .\user_profile\models.py:210
 msgid "Certificate file"
 msgstr "Arquivo do certificado"
 
-#: .\user_profile\models.py:214
+#: .\user_profile\models.py:215
+msgid "Duration in hours"
+msgstr "Duração em horas"
+
+#: .\user_profile\models.py:218
 #, fuzzy
 #| msgid "certificate"
 msgid "Certificate"
 msgstr "certificado"
 
-#: .\user_profile\models.py:231
+#: .\user_profile\models.py:222
+#, python-brace-format
+msgid " ({self.duration} hours)"
+msgstr " ({self.duration} horas)"
+
+#: .\user_profile\models.py:235
 msgid "Cover image"
 msgstr ""
 
-#: .\user_profile\models.py:235
+#: .\user_profile\models.py:239
 msgid "Date"
 msgstr "Data"
 
-#: .\user_profile\models.py:238
+#: .\user_profile\models.py:242
 msgid "Entry type"
 msgstr "Tipo"
 
-#: .\user_profile\models.py:240
+#: .\user_profile\models.py:244
 msgid "Side project"
 msgstr ""
 
-#: .\user_profile\models.py:241
+#: .\user_profile\models.py:245
 msgid "Client project"
 msgstr ""
 
-#: .\user_profile\models.py:242
+#: .\user_profile\models.py:246
 msgid "Product"
 msgstr ""
 
-#: .\user_profile\models.py:243
+#: .\user_profile\models.py:247
 msgid "Publication"
 msgstr ""
 
-#: .\user_profile\models.py:244
+#: .\user_profile\models.py:248
 msgid "POC"
 msgstr ""
 
-#: .\user_profile\models.py:251
+#: .\user_profile\models.py:255
 msgid "Portfolio"
 msgstr "Portfólio"
 
-#: .\user_profile\models.py:252
+#: .\user_profile\models.py:256
 msgid "portfolio entries"
 msgstr ""
 

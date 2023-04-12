@@ -25,7 +25,8 @@ class UserProfile(AbstractUser):
     contact_email = models.EmailField(_("Contact email"),
                                       max_length=254,
                                       blank=True)
-    contact_phone = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+    contact_phone = models.CharField(
+        validators=[phone_regex], max_length=17, blank=True)
     location = models.CharField(_("Location"), max_length=100, blank=True)
     website = models.URLField(_("Website"), max_length=256, blank=True)
     birthday = models.DateField(_("Birthday"), blank=True, null=True)
@@ -210,12 +211,15 @@ class Certificate(models.Model):
                             upload_to=certificate_file_path,
                             blank=True)
 
+    duration = models.PositiveIntegerField(
+        _("Duration in hours"), blank=True, null=True)
+
     class Meta:
         verbose_name = _("Certificate")
         verbose_name_plural = _("Certificates")
 
     def __str__(self):
-        return self.name
+        return self.name + (_(f" ({self.duration} hours)") if self.duration else "")
 
     def get_absolute_url(self):
         return reverse("certificates", kwargs={"pk": self.pk})
