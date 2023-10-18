@@ -40,3 +40,15 @@ class ResumeView(TemplateView):
                 context['error'] = _(f'"{language}" is not a valid language code')
 
         return context
+
+# from easy_pdf.views import PDFTemplateView
+
+# class ResumeAsPDF(PDFTemplateView):
+#     pass
+
+from web_resume import renderers
+
+class ResumeAsPDF(ResumeView):
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return renderers.render_to_pdf(self.template_name, context)
