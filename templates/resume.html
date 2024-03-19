@@ -1,286 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     {% load custom_tags %} {% load i18n %}
     <!-- Required meta tags -->
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <style>
-        profile-picture {
-            width: 150px;
-        }
-
-
-
-
-
-
-
-
+      profile-picture {
+        width: 150px;
+      }
     </style>
 
     <title>{{ profile.display_name }}'s web resume</title>
-</head>
+  </head>
 
-<body id="page-top" class="bg-primary bg-opacity-50">
-<!-- Page content-->
-<div class="jumbotron m-5 mb-0">
-    <!-- Post header-->
-    <header class="d-flex justify-content-between mb-5">
-        <!-- Post title-->
-        <div>
+  <body id="page-top" class="bg-primary bg-opacity-50">
+    <!-- Page content -->
+    <div class="jumbotron m-5 mb-0">
+      <!-- Post header -->
+      <header class="d-flex justify-content-between mb-5">
+        <!-- Post title -->
+        <div class="hstack">
+          <div>
             <h1 class="fw-bolder mb-1">{{ profile.display_name }}</h1>
             {% if profile.title %}
-            <h3 class="mb-1">{{ profile.title }}</h3>
+              <h3 class="mb-1">{{ profile.title }}</h3>
             {% endif %}
-            <div class="card-subtitle">
-                <!-- -->
-                {% if profile.location %}
-                <h5>
-                    {{ profile.location }} <i class="bi bi-geo-alt"></i>
-                </h5> <br/>
-                <!--  -->
-                {% endif %}
+            {% if profile.location %}
+              <h5><i class="bi bi-geo-alt"></i> {{ profile.location }}</h5>
+            {% endif %}
+            <br />
+            <p>{{ profile.summary }}</p>
+            <div>
+              {% if profile.contact_email %}
+                <a href="mailto:{{ profile.contact_email }}" class="btn btn-sm btn-outline-dark m-1"><i class="bi bi-envelope"></i> {{ profile.contact_email }}</a>
+              {% endif %}
+
+              {% if profile.contact_phone %}
+                <a href="tel:{{ profile.contact_phone }}" class="btn btn-sm btn-outline-dark m-1"><i class="bi bi-telephone"></i> {{ profile.contact_phone }}</a>
+              {% endif %}
+
+              {% if profile.usersociallink_set.all %}
+                {% for link in profile.usersociallink_set.all %}
+                  <a href="{{ link.get_link }}" class="btn btn-sm btn-outline-dark m-1" title="{{ link.socialmedia.name }}"><i class="bi {{ link.socialmedia.bi_icon }}"></i> {{ link.username }}</a>
+                {% endfor %}
+              {% endif %}
             </div>
-            <p>{{ profile.summary}}</p>
+          </div>
         </div>
 
-
         <!-- Profile picture -->
-        {% if profile.picture and not nopic%}
-        <figure class="ms-5">
-            <img class="rounded" style="width: 150px" src="{{profile.picture.url}}"/>
-        </figure>
+        {% if profile.picture and not nopic %}
+          <figure class="ms-5">
+            <img class="rounded" style="width: 150px" src="{{ profile.picture.url }}" />
+          </figure>
         {% endif %}
-    </header>
-</div>
-<div class="container-fluid bg-white">
-    <div class="row flex-wrap-reverse">
-        <!-- Side widgets-->
+      </header>
+    </div>
+    <div class="container-fluid bg-white">
+      <div class="row flex-wrap-reverse">
+        <!-- Side widgets -->
         <div class="col-lg-3 mt-2">
-            <!-- Contact information -->
-            <div class="card mb-4">
-                <div class="card-header">{% translate "Contact information" %}</div>
-                <div class="card-body d-flex flex-wrap">
-                    {% if profile.contact_email %}
-                    <a href="mailto:{{ profile.contact_email}}" class="btn btn-sm btn-outline-dark m-1">
-                        <i class="bi bi-envelope"></i> {{ profile.contact_email}}
-                        <!-- <br /> -->
-                    </a>
-                    {% endif %}
-                    <!-- -->
+          <!-- Contact information -->
+          {% comment %}
+          <div class="card mb-4">
+            <div class="card-header">
+              {% translate 'Contact information' %}
+            </div>
+            <div class="card-body d-flex flex-wrap">
+              {% if profile.contact_email %}
+                <a href="mailto:{{ profile.contact_email }}" class="btn btn-sm btn-outline-dark m-1">
+                  <i class="bi bi-envelope"></i> {{ profile.contact_email }}
+                  <!-- <br /> -->
+                </a>
+              {% endif %}
+              <!--  -->
 
-                    {% if profile.contact_phone %}
-                    <a href="tel:{{ profile.contact_phone}}" class="btn btn-sm btn-outline-dark m-1">
-                        <i class="bi bi-telephone"></i> {{ profile.contact_phone}}
-                        <!-- <br /> -->
-                    </a>
-                    <!-- -->
-                    {% endif %}
+              {% if profile.contact_phone %}
+                <a href="tel:{{ profile.contact_phone }}" class="btn btn-sm btn-outline-dark m-1">
+                  <i class="bi bi-telephone"></i> {{ profile.contact_phone }}
+                  <!-- <br /> -->
+                </a>
+                <!--  -->
+              {% endif %}
 
-                    <!--
+              <!--       
           <a href="{{link.get_link}}" class="btn btn-outline-primary" style="border-radius: 50%" title="{{link.socialmedia.name}}">
          onmouseover="function a(){this.style.color={{link.socialmedia.get_color}}}"
-        -->
-                    {% if profile.usersociallink_set.all %}
-                    {% for link in profile.usersociallink_set.all %}
-                    <a href="{{link.get_link}}" class="btn btn-sm btn-outline-dark m-1" title="{{link.username}}">
-                        <i class="bi {{link.socialmedia.bi_icon}}"></i> {{link.socialmedia.name}}
+               -->
+              {% if profile.usersociallink_set.all %}
+                {% for link in profile.usersociallink_set.all %}
+                  <a href="{{ link.get_link }}" class="btn btn-sm btn-outline-dark m-1" title="{{ link.username }}"><i class="bi {{ link.socialmedia.bi_icon }}"></i> {{ link.socialmedia.name }}</a>
+                  <!-- <br /> -->
+                  <!--  -->
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          {% endcomment %}
+
+          <!-- Skills -->
+          {% comment %}
+          {% if profile.get_skills.all %}
+            <div class="card mb-4">
+              <div class="card-header">
+                {% get_verbose_name_plural profile.skill_set.first %}
+              </div>
+              <div class="card-body">
+                <div>
+                  {% for skill in profile.get_skills %}
+                    <div class="badge rounded-pill bg-primary">{{ skill }}</div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% endcomment %}
+
+          <!-- Certificates -->
+          {% if profile.certificate_set.all %}
+            <div class="card mb-4">
+              <!-- <div class="card-header">{% get_verbose_name_plural profile.certificate_set.first %}</div> -->
+              <div class="card-header">
+                {% translate 'Certificates' %}
+              </div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  {% for certificate in profile.certificate_set.all %}
+                    <a href="{% if certificate.link %}
+                        {{ certificate.link }}
+                      {% elif certificate.file %}
+                        {{ certificate.file.url }}
+                      {% endif %}"
+                      target="_blank"
+                      class="list-group-item list-group-item-action">
+                      {{ certificate }}
                     </a>
-                    <!-- <br /> -->
-                    <!-- -->
-                    {% endfor %}
-                    {% endif %}
-                </div>
+                  {% endfor %}
+                </ul>
+              </div>
             </div>
-
-            <!-- Skills-->
-            {% comment %}
-            {% if profile.get_skills.all %}
-            <div class="card mb-4">
-                <div class="card-header">{% get_verbose_name_plural profile.skill_set.first %}</div>
-                <div class="card-body">
-                    <div>
-                        {% for skill in profile.get_skills %}
-
-                        <div class="badge rounded-pill bg-primary">{{skill}}</div>
-
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% endif %]
-            {% endcomment %}
-
-            <!-- Certificates-->
-            {% if profile.certificate_set.all %}
-            <div class="card mb-4">
-                <!-- <div class="card-header">{% get_verbose_name_plural profile.certificate_set.first %}</div> -->
-                <div class="card-header">{% translate "Certificates" %}</div>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        {% for certificate in profile.certificate_set.all %}
-
-                        <a href="{% if certificate.link %}{{ certificate.link }}
-                                 {% elif certificate.file %}{{certificate.file.url}}
-                                 {% endif %}"
-                           target="_blank"
-                           class="list-group-item list-group-item-action">{{certificate}}</a>
-
-                        {% endfor %}
-                    </ul>
-
-                </div>
-            </div>
-            {% endif %}
-
+          {% endif %}
         </div>
 
         <div class="col-lg-8">
-
-            <!-- Job experience -->
-            {% if profile.jobexperience_set.all %}
+          <!-- Job experience -->
+          {% if profile.jobexperience_set.all %}
             <section class="m-2 mb-4">
-                <h2 class="fw-bolder">{% translate "Job experiences" %}</h2>
-                <!-- <h2 class="fw-bolder">{% get_verbose_name profile.jobexperience_set.first %}</h2> -->
+              <h2 class="fw-bolder">{% translate 'Job experiences' %}</h2>
+              <!-- <h2 class="fw-bolder">{% get_verbose_name profile.jobexperience_set.first %}</h2> -->
 
-                {% for job in profile.jobexperience_set.all %}
+              {% for job in profile.jobexperience_set.all %}
                 <div class="card mb-2 bt-2">
-                    <div class=" card-header">
-                        <div class="d-flex justify-content-between align-items-baseline">
-                            <h4 class="card-title">{{job.role}} </h4>
-                            <small> {{job.period}} </small>
-                        </div>
-                        <div class="d-flex text-muted justify-content-between align-items-baseline">
-                            <h5>{{job.company}} </h5>
-                            <small class=" ml-auto"> {{job.location}} <i class="bi bi-geo-alt "></i></small>
-                        </div>
+                  <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-baseline">
+                      <h4 class="card-title">{{ job.role }}</h4>
+                      <small>{{ job.period }}</small>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text ">{{job.description}}</p>
+                    <div class="d-flex text-muted justify-content-between align-items-baseline">
+                      <h5>{{ job.company }}</h5>
+                      <small class="ml-auto">{{ job.location }} <i class="bi bi-geo-alt"></i></small>
                     </div>
-                    <div class="card-footer ">
-                        <div>
-                            {% for skill in job.skills_applied.all %}
-
-                            <div class="badge rounded-pill bg-primary ">{{skill}}</div>
-
-                            {% endfor %}
-                        </div>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">{{ job.description }}</p>
+                  </div>
+                  <div class="card-footer">
+                    <div>
+                      {% for skill in job.skills_applied.all %}
+                        <div class="badge rounded-pill bg-primary">{{ skill }}</div>
+                      {% endfor %}
                     </div>
+                  </div>
                 </div>
-
-                {% endfor %}
+              {% endfor %}
             </section>
-            {% endif %}
+          {% endif %}
 
-            <!-- Academic experience -->
-            {% if profile.academicexperience_set.all %}
-            <section class="m-2 mb-4 ">
-                <h2 class="fw-bolder mb-2 ">
-                    {% translate "Academic experiences" %}
-                </h2>
-
-                {% for education in profile.academicexperience_set.all %}
-                <div class="card mb-2 bt-2 ">
-                    <div class=" card-header">
-                        <div class="d-flex justify-content-between align-items-baseline">
-                            <h4 class="card-title">{{education.course}} </h4>
-                            <small> {{education.period}} </small>
-                        </div>
-                        <div class="d-flex text-muted justify-content-between align-items-baseline">
-                            <h5>{{education.school}} </h5>
-                            <small class=" ml-auto"> {{education.location}} <i class="bi bi-geo-alt "></i></small>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text ">{{education.description}}</p>
-                    </div>
-                </div>
-
-                {% endfor %}
-            </section>
-            {% endif %}
-
-            <!-- Portfolio -->
-            {% if profile.portfolioentry_set.all %}
+          <!-- Academic experience -->
+          {% if profile.academicexperience_set.all %}
             <section class="m-2 mb-4">
-                <h2 class="fw-bolder mb-2 ">
-                    {% get_verbose_name profile.portfolioentry_set.first %}
-                </h2>
+              <h2 class="fw-bolder mb-2">{% translate 'Academic experiences' %}</h2>
 
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-                    {% for entry in profile.portfolioentry_set.all %}
-                    <div class="col">
-                        <div class="card m-2">
-                            <!-- <div class=" card-header">
-                        </div> -->
-                            <a href="{{entry.link}}" style="color: inherit; text-decoration: inherit;">
-                                <!-- <div class=" card-header">
-
-                                </div> -->
-                                <div class=" card-header justify-content-between align-items-baseline">
-                                    <h5 class="card-title">{{entry.title}} </h5>
-
-                                    {% if entry.date %} <small> {{entry.date}} </small> {% endif %}
-
-                                </div>
-                                <div class="card-body">
-
-
-                                    <p class="card-text ">{{entry.description}}</p>
-                                </div>
-                                <div class=" card-footer"></div>
-                            </a>
-                        </div>
+              {% for education in profile.academicexperience_set.all %}
+                <div class="card mb-2 bt-2">
+                  <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-baseline">
+                      <h4 class="card-title">{{ education.course }}</h4>
+                      <small>{{ education.period }}</small>
                     </div>
-
-
-                    {% endfor %}
+                    <div class="d-flex text-muted justify-content-between align-items-baseline">
+                      <h5>{{ education.school }}</h5>
+                      <small class="ml-auto">{{ education.location }} <i class="bi bi-geo-alt"></i></small>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">{{ education.description }}</p>
+                  </div>
                 </div>
+              {% endfor %}
             </section>
-            {% endif %}
+          {% endif %}
 
+          <!-- Portfolio -->
+          {% if profile.portfolioentry_set.all %}
+            <section class="m-2 mb-4">
+              <h2 class="fw-bolder mb-2">{% get_verbose_name profile.portfolioentry_set.first %}</h2>
+
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                {% for entry in profile.portfolioentry_set.all %}
+                  <div class="col">
+                    <div class="card m-2">
+                      <!--        <div class=" card-header">
+                        </div>        -->
+                      <a href="{{ entry.link }}" style="color: inherit; text-decoration: inherit;">
+                        <!--        <div class=" card-header">
+
+                                </div>        -->
+                        <div class="card-header justify-content-between align-items-baseline">
+                          <h5 class="card-title">{{ entry.title }}</h5>
+
+                          {% if entry.date %}
+                            <small>{{ entry.date }}</small>
+                          {% endif %}
+                        </div>
+                        <div class="card-body">
+                          <p class="card-text">{{ entry.description }}</p>
+                        </div>
+                        <div class="card-footer"></div>
+                      </a>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </section>
+          {% endif %}
         </div>
+      </div>
     </div>
-</div>
-<!-- Footer-->
-<footer class="py-5 bg-dark ">
-    <div class="container ">
-        <p class="m-0 text-center text-white ">Made by Caio Cantuária 2022</p>
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Made by Caio Cantuária 2023</p>
         {% comment %}
         {% if languages %}
-        <p>
-            |
-            {% for lang in languages %}
-            <a href="{{ profile.username }}/{{ lang.url }}">{{ lang.name }}</a>
+          <p>
+            |{% for lang in languages %}
+              <a href="{{ profile.username }}/{{ lang.url }}">{{ lang.name }}</a>
             {% endfor %}
-        </p>
+          </p>
         {% endif %}
         {% endcomment %}
-    </div>
-</footer>
+      </div>
+    </footer>
 
-<!-- Optional JavaScript; choose one of the two! -->
+    <!-- Optional JavaScript; choose one of the two! -->
 
-<script src="https://kit.fontawesome.com/a076d05399.js " crossorigin="anonymous "></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js " crossorigin="anonymous "></script>
 
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js "
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj "
-        crossorigin="anonymous "></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js " integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj " crossorigin="anonymous "></script>
 
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--       
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js " integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp " crossorigin="anonymous "></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js " integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/ " crossorigin="anonymous "></script>
--->
-</body>
-
+       -->
+  </body>
 </html>
